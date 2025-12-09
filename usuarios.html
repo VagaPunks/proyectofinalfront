@@ -22,7 +22,7 @@
           <li class="nav-item"><a class="nav-link" href="profesores.html">Profesores</a></li>
           <li class="nav-item"><a class="nav-link" href="asignaturas.html">Asignaturas</a></li>
           <li class="nav-item"><a class="nav-link" href="evaluaciones.html">Evaluaciones</a></li>
-          <li class="nav-item"><a class="nav-link active" href="usuarios.html">Usuarios</a></li>  
+          <li class="nav-item"><a class="nav-link active" href="usuarios.html">Usuarios</a></li>
           <li class="nav-item"><a class="nav-link" href="consulta.html">Consulta</a></li>
         </ul>
       </div>
@@ -58,7 +58,7 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <form id="formUsuario">
+          <form id="formUsuario" novalidate>
             <div class="mb-3">
               <label class="form-label">Nombre</label>
               <input type="text" class="form-control" id="nombre" placeholder="Ana López" required>
@@ -111,16 +111,21 @@
         const res = await fetch(API_URL, { credentials: 'include' });
         const data = await res.json();
 
-        if (data.usuarios) {
-          renderUsuarios(data.usuarios);
+        console.log(data);  // Agregamos el log para ver la respuesta completa
+
+        if (Array.isArray(data.usuarios)) {
+          renderUsuarios(data.usuarios);  // Solo renderizamos si es un array
         } else {
-          console.error("No se encontraron usuarios");
+          console.error("La respuesta no contiene un array de usuarios", data);
         }
       } catch (error) {
         console.error("Error al cargar usuarios:", error);
       }
     }
 
+    // ==========================
+    // Renderizar usuarios en la tabla
+    // ==========================
     function renderUsuarios(usuarios) {
       usuariosTable.innerHTML = '';
       usuarios.forEach(usuario => {
@@ -236,5 +241,6 @@
     // ==========================
     cargarUsuarios();
   </script>
+
 </body>
 </html>
