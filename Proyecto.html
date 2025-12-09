@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seguimiento a Profesores - Prototipo UI</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Tipografía moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #0d6efd;
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link,
+        .navbar .navbar-toggler-icon {
+            color: #fff !important;
+        }
+
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background-color: #0d6efd;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border-radius: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+        }
+
+        table th {
+            background-color: #e9ecef;
+        }
+
+        table td,
+        table th {
+            background-color: #fff !important;
+        }
+
+        footer {
+            background-color: #0d6efd;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        .offcanvas-body .form-label {
+            font-weight: 500;
+        }
+
+        .badge-status {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Seguimiento Profesores</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#profesores">Profesores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#asignaturas">Asignaturas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#evaluaciones">Evaluaciones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#usuarios">Usuarios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reportes">Reportes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#consulta">Consulta</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container flex-grow-1 mt-4 mb-5">
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="view">
+            <h2 class="fw-bold mb-4"><i class="bi bi-speedometer2 me-2"></i>Panel Principal</h2>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-person-lines-fill display-4 text-primary mb-2"></i>
+                        <h4>25</h4>
+                        <p>Profesores registrados</p>
+                        <a href="#profesores" class="btn btn-primary btn-sm">Ver lista</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-journal-text display-4 text-primary mb-2"></i>
+                        <h4>14</h4>
+                        <p>Asignaturas activas</p>
+                        <a href="#asignaturas" class="btn btn-primary btn-sm">Ver catálogo</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-clipboard-check display-4 text-primary mb-2"></i>
+                        <h4>56</h4>
+                        <p>Evaluaciones</p>
+                        <a href="#evaluaciones" class="btn btn-primary btn-sm">Ver detalles</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-people display-4 text-primary mb-2"></i>
+                        <h4>8</h4>
+                        <p>Usuarios activos</p>
+                        <a href="#usuarios" class="btn btn-primary btn-sm">Ver usuarios</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-file-earmark-text display-4 text-primary mb-2"></i>
+                        <h4>12</h4>
+                        <p>Reportes generados</p>
+                        <a href="#reportes" class="btn btn-primary btn-sm">Ver reportes</a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center p-2">
+                        <i class="bi bi-eye display-4 text-primary mb-2"></i>
+                        <h4>32</h4>
+                        <p>Consultas realizadas</p>
+                        <a href="#consulta" class="btn btn-primary btn-sm">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFESORES -->
+        <div id="profesores" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-person-lines-fill me-2"></i>Gestión de Profesores</h2>
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalProfesor">
+                <i class="bi bi-plus-circle me-1"></i>Agregar Profesor
+            </button>
+
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Estatus del Profesor</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>Juan Pérez</td>
+                                <td>juan.perez@iteso.mx</td>
+                                <td>3312345678</td>
+                                <td><span class="badge bg-success badge-status">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalProfesor" title="Editar"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"
+                                        title="Eliminar"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>Diego Esquivel</td>
+                                <td>diegor.esquviel@iteso.mx</td>
+                                <td>3323456789</td>
+                                <td><span class="badge bg-danger badge-status">Vetado</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalProfesor" title="Editar"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"
+                                        title="Eliminar"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ASIGNATURAS -->
+        <div id="asignaturas" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-journal-text me-2"></i>Catálogo de Asignaturas</h2>
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAsignatura">
+                <i class="bi bi-plus-circle me-1"></i>Agregar Asignatura
+            </button>
+
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Código</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2001</td>
+                                <td>Matemáticas I</td>
+                                <td>MAT101</td>
+                                <td>Curso introductorio de matemáticas</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalAsignatura" title="Editar"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"
+                                        title="Eliminar"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2002</td>
+                                <td>Programación Básica</td>
+                                <td>PRO101</td>
+                                <td>Fundamentos de lógica y programación</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalAsignatura" title="Editar"><i
+                                            class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"
+                                        title="Eliminar"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVALUACIONES -->
+        <div id="evaluaciones" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-clipboard-check me-2"></i>Evaluaciones</h2>
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalEvaluacion">
+                <i class="bi bi-plus-circle me-1"></i>Agregar Evaluación
+            </button>
+
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID Evaluación</th>
+                                <th>Profesor</th>
+                                <th>Asignatura</th>
+                                <th>Calificación</th>
+                                <th>Observaciones</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>501</td>
+                                <td>Juan Pérez</td>
+                                <td>Matemáticas I</td>
+                                <td>4.5</td>
+                                <td>Buen manejo del grupo</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalEvaluacion"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>502</td>
+                                <td>Diego Esquivel</td>
+                                <td>Programación Básica</td>
+                                <td>4.8</td>
+                                <td>Excelente desempeño</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalEvaluacion"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- USUARIOS -->
+        <div id="usuarios" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-people me-2"></i>Gestión de Usuarios</h2>
+            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+                <i class="bi bi-person-plus me-1"></i>Agregar Usuario
+            </button>
+
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Rol</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>301</td>
+                                <td>Ana López</td>
+                                <td><span class="badge bg-info badge-status">Coordinador</span></td>
+                                <td>ana.lopez@iteso.mx</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalUsuario"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>302</td>
+                                <td>Diego Esquivel</td>
+                                <td><span class="badge bg-primary badge-status">Administrador</span></td>
+                                <td>diegor.esquivel@iteso.mx</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#modalUsuario"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger" data-bs-toggle="tooltip"><i
+                                            class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORTES -->
+        <div id="reportes" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-file-earmark-text me-2"></i>Reportes Históricos</h2>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>Genera reportes con filtros por estatus de veto, periodo o asignatura.</p>
+                    <button class="btn btn-primary me-2"><i class="bi bi-filetype-pdf me-1"></i>Generar PDF</button>
+                    <button class="btn btn-success"><i class="bi bi-filetype-xlsx me-1"></i>Generar Excel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONSULTA -->
+        <div id="consulta" class="view d-none">
+            <h2 class="fw-bold mb-3"><i class="bi bi-eye me-2"></i>Consultas</h2>
+            <div class="card">
+                <div class="card-body">
+                    <form class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Profesor</label>
+                            <input type="text" class="form-control" placeholder="Nombre del profesor">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Asignatura</label>
+                            <input type="text" class="form-control" placeholder="Nombre de asignatura">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select">
+                                <option value="">Todos</option>
+                                <option>Activo</option>
+                                <option>Inactivo</option>
+                                <option>Vetado</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary"><i class="bi bi-search me-1"></i>Buscar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <small>&copy; 2025 Seguimiento a Profesores. Todos los derechos reservados.</small>
+    </footer>
+
+    <!-- MODALES CON VALIDACIONES -->
+
+    <!-- Modal Profesor -->
+    <div class="modal fade" id="modalProfesor" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Agregar / Editar Profesor</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formProfesor">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Juan Pérez" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correo</label>
+                            <input type="email" class="form-control" placeholder="correo@universidad.mx" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" class="form-control" placeholder="3312345678" pattern="[0-9]{10}" required>
+                            <div class="form-text">Solo 10 números.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Estatus</label>
+                            <select class="form-select" required>
+                                <option value="">Selecciona...</option>
+                                <option>Activo</option>
+                                <option>Vetado</option>
+                                <option>Inactivo</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" onclick="validarFormulario('formProfesor')">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Evaluación -->
+    <div class="modal fade" id="modalEvaluacion" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Agregar / Editar Evaluación</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEvaluacion">
+                        <div class="mb-3">
+                            <label class="form-label">Profesor</label>
+                            <input type="text" class="form-control" placeholder="Juan Pérez" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Asignatura</label>
+                            <input type="text" class="form-control" placeholder="Matemáticas I" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Calificación</label>
+                            <input type="number" step="0.1" min="0" max="5" class="form-control" placeholder="4.5" required>
+                            <div class="form-text">Valor entre 0 y 5.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Observaciones</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" onclick="validarFormulario('formEvaluacion')">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Asignatura -->
+    <div class="modal fade" id="modalAsignatura" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Agregar / Editar Asignatura</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAsignatura">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Matemáticas I" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Código</label>
+                            <input type="text" class="form-control" placeholder="MAT101" pattern="[A-Z]{3}[0-9]{3}" required>
+                            <div class="form-text">Formato: 3 letras mayúsculas + 3 números.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Descripción</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" onclick="validarFormulario('formAsignatura')">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Usuario -->
+    <div class="modal fade" id="modalUsuario" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Agregar / Editar Usuario</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formUsuario">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" placeholder="Ana López" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Correo</label>
+                            <input type="email" class="form-control" placeholder="correo@universidad.mx" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Rol</label>
+                            <select class="form-select" required>
+                                <option value="">Selecciona...</option>
+                                <option>Administrador</option>
+                                <option>Coordinador</option>
+                                <option>Consulta</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" placeholder="********" required minlength="6">
+                            <div class="form-text">Mínimo 6 caracteres.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" onclick="validarFormulario('formUsuario')">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cambiar vistas SPA
+        document.querySelectorAll('.navbar .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').substring(1);
+                document.querySelectorAll('.view').forEach(v => v.classList.add('d-none'));
+                document.getElementById(target).classList.remove('d-none');
+            });
+        });
+
+        // Validación de formularios
+        function validarFormulario(formId) {
+            const form = document.getElementById(formId);
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return false;
+            }
+
+            const telefono = form.querySelector('input[type="tel"]');
+            if (telefono && !/^\d{10}$/.test(telefono.value)) {
+                alert('El teléfono debe tener 10 dígitos.');
+                telefono.focus();
+                return false;
+            }
+
+            const codigo = form.querySelector('input[pattern]');
+            if (codigo && codigo.pattern && !(new RegExp(codigo.pattern)).test(codigo.value)) {
+                alert('El código de asignatura no cumple con el formato requerido.');
+                codigo.focus();
+                return false;
+            }
+
+            alert('Formulario válido. Se puede enviar.');
+            return true;
+        }
+    </script>
+</body>
+
+</html>

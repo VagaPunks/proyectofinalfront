@@ -1,0 +1,154 @@
+<!-- MODALES: Profesor, Evaluación, Asignatura, Usuario -->
+<!-- Modal Profesor -->
+<div class="modal fade" id="modalProfesor" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Agregar / Editar Profesor</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formProfesor" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Juan Pérez" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" class="form-control" placeholder="correo@universidad.mx" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" placeholder="3312345678" pattern="[0-9]{10}" required>
+            <div class="form-text">Solo 10 números.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Estatus</label>
+            <select class="form-select" required>
+              <option value="">Selecciona...</option>
+              <option>Activo</option>
+              <option>Vetado</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" onclick="validarFormulario('formProfesor')">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Evaluación -->
+<div class="modal fade" id="modalEvaluacion" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Agregar / Editar Evaluación</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEvaluacion" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Profesor</label>
+            <input type="text" class="form-control" placeholder="Juan Pérez" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Asignatura</label>
+            <input type="text" class="form-control" placeholder="Matemáticas I" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Calificación</label>
+            <input type="number" step="0.1" min="0" max="5" class="form-control" placeholder="4.5" required>
+            <div class="form-text">Valor entre 0 y 5.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Observaciones</label>
+            <textarea class="form-control" rows="3" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" onclick="validarFormulario('formEvaluacion')">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Asignatura -->
+<div class="modal fade" id="modalAsignatura" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Agregar / Editar Asignatura</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formAsignatura" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Matemáticas I" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Código</label>
+            <input type="text" class="form-control" placeholder="MAT101" pattern="[A-Z]{3}[0-9]{3}" required>
+            <div class="form-text">Formato: 3 letras mayúsculas + 3 números.</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-control" rows="3" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" onclick="validarFormulario('formAsignatura')">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Usuario -->
+<div class="modal fade" id="modalUsuario" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Agregar / Editar Usuario</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formUsuario" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" placeholder="Ana López" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Correo</label>
+            <input type="email" class="form-control" placeholder="correo@universidad.mx" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Rol</label>
+            <select class="form-select" required>
+              <option value="">Selecciona...</option>
+              <option>Administrador</option>
+              <option>Coordinador</option>
+              <option>Consulta</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" placeholder="********" required minlength="6">
+            <div class="form-text">Mínimo 6 caracteres.</div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" onclick="validarFormulario('formUsuario')">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
