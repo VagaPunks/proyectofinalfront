@@ -1,109 +1,117 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Asignaturas - Seguimiento</title>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchAsignaturas();
+  });
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="css/estilos.css">
-</head>
-<body>
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="index.html">Seguimiento Profesores</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
-          <li class="nav-item"><a class="nav-link" href="profesores.html">Profesores</a></li>
-          <li class="nav-item"><a class="nav-link active" href="asignaturas.html">Asignaturas</a></li>
-          <li class="nav-item"><a class="nav-link" href="evaluaciones.html">Evaluaciones</a></li>
-          <li class="nav-item"><a class="nav-link" href="usuarios.html">Usuarios</a></li>
-          <li class="nav-item"><a class="nav-link" href="consulta.html">Consulta</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  // Obtener todas las asignaturas
+  function fetchAsignaturas() {
+    fetch('https://proyectofinal-mzx3.onrender.com/api/asignaturas')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector('table tbody');
+        tableBody.innerHTML = '';
 
-  <!-- CONTENIDO -->
-  <main class="container my-5">
-    <h2 class="fw-bold mb-3"><i class="bi bi-journal-text me-2"></i>Catálogo de Asignaturas</h2>
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalAsignatura">
-      <i class="bi bi-plus-circle me-1"></i>Agregar Asignatura
-    </button>
+        data.forEach(asignatura => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${asignatura._id}</td>
+            <td>${asignatura.nombre}</td>
+            <td>${asignatura.codigo}</td>
+            <td>${asignatura.descripcion}</td>
+            <td>
+              <button class="btn btn-sm btn-outline-primary" onclick="editarAsignatura('${asignatura._id}')"><i class="bi bi-pencil"></i></button>
+              <button class="btn btn-sm btn-outline-danger" onclick="eliminarAsignatura('${asignatura._id}')"><i class="bi bi-trash"></i></button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error al cargar las asignaturas:', error));
+  }
 
-    <div class="card">
-      <div class="card-body table-responsive">
-        <table class="table table-hover align-middle">
-          <thead>
-            <tr>
-              <th>ID</th><th>Nombre</th><th>Código</th><th>Descripción</th><th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2001</td><td>Matemáticas I</td><td>MAT101</td><td>Curso introductorio de matemáticas</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalAsignatura"><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-            <tr>
-              <td>2002</td><td>Programación Básica</td><td>PRO101</td><td>Fundamentos de lógica y programación</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalAsignatura"><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </main>
+  // Editar una asignatura
+  function editarAsignatura(id) {
+    fetch(`https://proyectofinal-mzx3.onrender.com/api/asignaturas/${id}`)
+      .then(response => response.json())
+      .then(asignatura => {
+        const form = document.querySelector('#formAsignatura');
+        form.querySelector('input[name="nombre"]').value = asignatura.nombre;
+        form.querySelector('input[name="codigo"]').value = asignatura.codigo;
+        form.querySelector('textarea[name="descripcion"]').value = asignatura.descripcion;
 
-  <!-- MODAL ASIGNATURA -->
-  <div class="modal fade" id="modalAsignatura" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title">Agregar / Editar Asignatura</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="formAsignatura" onsubmit="return validarFormulario('formAsignatura')">
-            <div class="mb-3">
-              <label class="form-label">Nombre</label>
-              <input type="text" class="form-control" placeholder="Matemáticas I" required>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Código</label>
-              <input type="text" class="form-control" placeholder="MAT101" pattern="[A-Z]{3}[0-9]{3}" required>
-              <div class="form-text">Formato: 3 letras mayúsculas + 3 números.</div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Descripción</label>
-              <textarea class="form-control" rows="3" required></textarea>
-            </div>
-            <div class="text-end">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-primary">Guardar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+        // Cambiar el comportamiento del formulario a actualizar
+        form.onsubmit = (e) => {
+          e.preventDefault();
+          actualizarAsignatura(id);
+        };
+        // Mostrar el modal
+        new bootstrap.Modal(document.getElementById('modalAsignatura')).show();
+      })
+      .catch(error => console.error('Error al cargar los datos de la asignatura:', error));
+  }
 
-  <footer class="text-center text-white py-3 bg-primary mt-auto">
-    <small>&copy; 2025 Seguimiento a Profesores. Todos los derechos reservados.</small>
-  </footer>
+  // Actualizar asignatura
+  function actualizarAsignatura(id) {
+    const form = document.querySelector('#formAsignatura');
+    const asignaturaData = {
+      nombre: form.querySelector('input[name="nombre"]').value,
+      codigo: form.querySelector('input[name="codigo"]').value,
+      descripcion: form.querySelector('textarea[name="descripcion"]').value,
+    };
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/app.js"></script>
-</body>
-</html>
+    fetch(`https://proyectofinal-mzx3.onrender.com/api/asignaturas/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(asignaturaData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Asignatura actualizada:', data);
+      fetchAsignaturas();  // Refrescar la lista de asignaturas
+      document.querySelector('#modalAsignatura').modal('hide');  // Cerrar el modal
+    })
+    .catch(error => console.error('Error al actualizar la asignatura:', error));
+  }
+
+  // Eliminar asignatura
+  function eliminarAsignatura(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar esta asignatura?')) {
+      fetch(`https://proyectofinal-mzx3.onrender.com/api/asignaturas/${id}`, {
+        method: 'DELETE'
+      })
+      .then(() => {
+        console.log('Asignatura eliminada');
+        fetchAsignaturas();  // Refrescar la lista de asignaturas
+      })
+      .catch(error => console.error('Error al eliminar la asignatura:', error));
+    }
+  }
+
+  // Agregar una nueva asignatura
+  document.querySelector('#formAsignatura').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const asignaturaData = {
+      nombre: form.querySelector('input[name="nombre"]').value,
+      codigo: form.querySelector('input[name="codigo"]').value,
+      descripcion: form.querySelector('textarea[name="descripcion"]').value,
+    };
+
+    fetch('https://proyectofinal-mzx3.onrender.com/api/asignaturas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(asignaturaData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Asignatura agregada:', data);
+      fetchAsignaturas();  // Refrescar la lista de asignaturas
+      document.querySelector('#modalAsignatura').modal('hide');  // Cerrar el modal
+    })
+    .catch(error => console.error('Error al agregar la asignatura:', error));
+  });
+</script>
