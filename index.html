@@ -21,8 +21,6 @@
                   method: 'GET',
                     credentials: 'include' // Asegura que las cookies se envíen
                 });
-                console.log(response);
-                alert('Inicio de sesión exitoso');
                 if (!response.ok) {
                     // Si no está autenticado, redirige al login
                     window.location.href = "login.html";
