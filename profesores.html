@@ -109,8 +109,9 @@
         });
         const data = await res.json();
 
-        if (Array.isArray(data)) {
-          renderProfesores(data);
+        // Accede al arreglo de profesores desde la propiedad "profesores" en la respuesta
+        if (data.profesores && Array.isArray(data.profesores)) {
+          renderProfesores(data.profesores);
         } else {
           console.error("La respuesta no contiene un array de profesores", data);
         }

@@ -68,7 +68,7 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Descripción</label>
-              <textarea class="form-control" id="descripcion" placeholder="Descripción de la asignatura" required></textarea>
+              <textarea class="form-control" id="descripcion" placeholder="Fundamentos de matemáticas" required></textarea>
             </div>
             <div class="text-end">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -100,8 +100,9 @@
         });
         const data = await res.json();
 
-        if (Array.isArray(data)) {
-          renderAsignaturas(data);
+        // Accede al arreglo de asignaturas desde la propiedad "asignaturas" en la respuesta
+        if (data.asignaturas && Array.isArray(data.asignaturas)) {
+          renderAsignaturas(data.asignaturas);
         } else {
           console.error("La respuesta no contiene un array de asignaturas", data);
         }
